@@ -13,7 +13,9 @@
   
   	<properties>
 		<spring.version>3.2.13.RELEASE</spring.version>
-		<springldap.version>2.0.0.RELEASE</springldap.version>
+		<springldap.version>2.0.4.RELEASE</springldap.version>
+		<jackson.version>1.9.13</jackson.version>
+		<logback.version>1.1.0</logback.version>
 	</properties>
   
 	<dependencies>
@@ -29,7 +31,7 @@
 		<dependency>  
 		   <groupId>org.codehaus.jackson</groupId>  
 		   <artifactId>jackson-mapper-asl</artifactId>  
-		   <version>1.9.13</version>  
+		   <version>${jackson.version}</version>  
 		</dependency>
 		
 		<!-- Spring LDAP -->
@@ -55,7 +57,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>0.9.20</version>
+			<version>${logback.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -105,8 +107,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>
