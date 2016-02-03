@@ -14,7 +14,14 @@ This sample is a Directory portal based on [Spring LDAP].
 
 ## Attributes mapping
 
-Basically mapping is described with `@LdapAttribute` annotation.
+LDAP entry mapping is described with `@LdapEntry` annotation. 
+
+``` java
+@LdapEntry({"organizationalPerson", "person"})
+public class Person ...
+```
+
+LDAP attribute mapping is described with `@LdapAttribute` annotation.
 
 ``` java
 @LdapAttribute("givenName")
