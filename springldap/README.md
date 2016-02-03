@@ -15,3 +15,9 @@ This sample is a Directory portal based on [Spring LDAP].
    [Spring LDAP]: <http://projects.spring.io/spring-ldap/>
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
    [jQuery DataTables]: <http://datatables.net/>
+   
+## Run
+To run this sample :
+1. Do `mvn package` in order to build springldap.war
+2. Deploy the war on a Tomcat
+3. Navigate to `http://localhost:8080/springldap`
