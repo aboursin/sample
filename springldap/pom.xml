@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>sample</groupId>
+	<artifactId>springldap</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+  
+	<name>Sample Spring LDAP</name>
+  
+  	<properties>
+		<spring.version>3.2.13.RELEASE</spring.version>
+		<springldap.version>2.0.0.RELEASE</springldap.version>
+	</properties>
+  
+	<dependencies>
+    
+    	<!--  Spring MVC (+ Jackson mapper) -->
+	
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>  
+		   <groupId>org.codehaus.jackson</groupId>  
+		   <artifactId>jackson-mapper-asl</artifactId>  
+		   <version>1.9.13</version>  
+		</dependency>
+		
+		<!-- Spring LDAP -->
+		
+		<dependency>
+		    <groupId>org.springframework.ldap</groupId>
+		    <artifactId>spring-ldap-core</artifactId>
+		    <exclusions>
+	            <exclusion>
+	                <groupId>org.slf4j</groupId>
+	                <artifactId>slf4j-api</artifactId>
+	             </exclusion>
+	             <exclusion>
+	                 <groupId>org.slf4j</groupId>
+	                 <artifactId>jcl-over-slf4j</artifactId>
+	             </exclusion>
+	        </exclusions>
+		    <version>${springldap.version}</version>
+		</dependency>
+
+		<!--  Logging -->
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.20</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- Servlet -->
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<!-- Tests (JUnit & Spring test)  -->
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.ldap</groupId>
+		    <artifactId>spring-ldap-test</artifactId>
+		    <version>${springldap.version}</version>
+		</dependency>
+		
+	</dependencies>
+  
+  	<build>
+  		<finalName>springldap</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

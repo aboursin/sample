@@ -1,0 +1,67 @@
+dn: cn=Robert Browning,ou=users,o=sample
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Robert Browning
+sn: Browning
+givenname: Robert
+uid: 005210
+mail: rbrowning@sample.com
+telephoneNumber: +44 20 7946 0710
+facsimileTelephoneNumber: +44 20 7946 0700
+mobile: +44 77 0090 0231
+company: COMY LTD
+departmentNumber: Human Resources
+l: London
+
+dn: cn=John Keats,ou=users,o=sample
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: John Keats
+sn: Keats
+givenname: John
+uid: 001377
+mail: jkeats@sample.com
+telephoneNumber: +1 646 555 0173
+facsimileTelephoneNumber: +1 646 555 0100
+mobile: +1 646 226 8533
+company: COMY US
+departmentNumber: Sales
+l: New York
+
+dn: cn=Hugo Williams,ou=users,o=sample
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Hugo Williams
+sn: Williams
+givenname: Hugo
+uid: 000896
+mail: hwilliams@sample.com
+telephoneNumber: +44 20 7946 0788
+facsimileTelephoneNumber: +44 20 7946 0700
+mobile: +44 77 0090 0992
+company: COMY LTD
+departmentNumber: Research and Development
+l: London
+
+dn: cn=John Milton,ou=users,o=sample
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: John Milton
+sn: Milton
+givenname: John
+uid: 003614
+mail: jmilton@sample.com
+telephoneNumber: +44 20 7946 0738
+facsimileTelephoneNumber: +44 20 7946 0700
+mobile: +44 77 0090 0600
+company: COMY LTD
+departmentNumber: Research and Development
+l: London

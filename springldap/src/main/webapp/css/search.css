@@ -1,0 +1,32 @@
+.table th, .table td, .table input{
+	font-size : 11px;
+}
+
+.table thead>tr>th{
+	border-bottom: 0px;
+	background : #5cb85c;
+	color : #ffffff;
+}
+
+.table{
+	border: 1px solid #5cb85c;
+	-moz-border-radius: 5px;
+	-webkit-border-radius : 5px;
+	border-radius: 5px;
+	word-wrap: break-word;
+}
+
+.table .filter tr th input{
+	background: #ffffff url(images/filter.png) no-repeat scroll 3px center;
+	width : 100%;
+	padding-left : 22px;
+}
+
+label{
+	font-size : 11px;
+	margin-top: 10px;
+}
+
+.btn-default{
+	background-color: #dddddd;
+}	
