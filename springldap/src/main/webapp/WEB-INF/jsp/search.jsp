@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html lang="fr">
 	<head>
@@ -16,7 +17,7 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js"></script>
 		
 		<!-- Custom css & js -->
-		<link href="./css/search.css" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/search.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript">
 			$(document).ready(function(){
 				
@@ -35,7 +36,7 @@
 					"serverSide": false,
 					"ajax": { 
 						"dataSrc": "", 
-						"url": "./search",
+						"url": "<c:url value='/search'/>",
 						"type": "POST",
 						"data" : function(data) {
 							// Build data

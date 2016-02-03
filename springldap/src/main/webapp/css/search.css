@@ -17,7 +17,7 @@
 }
 
 .table .filter tr th input{
-	background: #ffffff url(images/filter.png) no-repeat scroll 3px center;
+	background: #ffffff url(../images/filter.png) no-repeat scroll 3px center;
 	width : 100%;
 	padding-left : 22px;
 }

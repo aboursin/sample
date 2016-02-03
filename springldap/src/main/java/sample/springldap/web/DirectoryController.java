@@ -42,7 +42,7 @@ public class DirectoryController {
 	 * Default view rendering.
 	 * @return Search view
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
 	public String view(ModelMap model) {
 		model.addAttribute("criteria", new Person());
 		return "search";
