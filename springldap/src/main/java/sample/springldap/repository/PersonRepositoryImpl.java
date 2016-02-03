@@ -9,6 +9,7 @@ import javax.naming.directory.ModificationItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.ldap.core.ContextMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.Filter;
@@ -41,7 +42,13 @@ public class PersonRepositoryImpl implements PersonRepository {
 	 */
 	public Person findOne(String cn){
 		Filter filter = LdapHelper.buildFilter(new Person(cn));
-		return (Person) ldapTemplate.searchForObject(PERSON_ROOT, filter.encode(), contextMapper);
+		Person person;
+		try{
+			person = (Person) ldapTemplate.searchForObject(PERSON_ROOT, filter.encode(), contextMapper);
+		} catch(IncorrectResultSizeDataAccessException e){
+			person = null;
+		}
+		return person;
 	}
 	
 	/**

@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Custom annotation for a LDAP type ID.
- * In addition to {@link LdapAttribute} it sets the ID of an {@link LdapClass}.
+ * In addition to {@link LdapAttribute} it sets the ID of an {@link LdapEntry}.
  * @author angelo.boursin
  */
 @Retention(RetentionPolicy.RUNTIME)

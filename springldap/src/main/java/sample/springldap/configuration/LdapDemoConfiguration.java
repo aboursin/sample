@@ -3,6 +3,7 @@ package sample.springldap.configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ import org.springframework.ldap.test.LdapTestUtils;
 @Profile("demo")
 @Configuration
 @PropertySource("classpath:ldap.properties")
-public class LdapDemoConfiguration implements  DisposableBean {
+public class LdapDemoConfiguration implements InitializingBean, DisposableBean {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(LdapDemoConfiguration.class);
 	
@@ -33,7 +34,6 @@ public class LdapDemoConfiguration implements  DisposableBean {
 	
 	public LdapDemoConfiguration(){
 		super();
-		LOGGER.info("Starting...");
 	}
 	
 	/**
@@ -43,21 +43,12 @@ public class LdapDemoConfiguration implements  DisposableBean {
 	 */
 	@Bean
 	public ContextSource contextSource() throws Exception{
-		
-		// For Demo purpose : start embedded LDAP Server
-		LdapTestUtils.startEmbeddedServer(389, env.getProperty("ldap.base"), "sample");
-		
-		// Build context source
 		LdapContextSource contextSource = new LdapContextSource();
 		contextSource.setUrl(env.getProperty("ldap.url"));
 		contextSource.setBase(env.getProperty("ldap.base"));
 		contextSource.setUserDn(env.getProperty("ldap.userDn"));
 		contextSource.setPassword(env.getProperty("ldap.password"));
 		contextSource.afterPropertiesSet();
-		
-		// For Demo purpose : populate LDAP from LDIF file
-		LdapTestUtils.cleanAndSetup(contextSource, LdapUtils.newLdapName(env.getProperty("ldap.base")), new ClassPathResource("annuaire.ldif"));
-		
 		return contextSource;
 	}
 	
@@ -77,9 +68,22 @@ public class LdapDemoConfiguration implements  DisposableBean {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void destroy() throws Exception {
+	public void afterPropertiesSet() throws Exception {
+		// For Demo purpose : start embedded LDAP Server
+		LOGGER.info("Start LDAP embedded server !");
+		LdapTestUtils.startEmbeddedServer(389, env.getProperty("ldap.base"), "sample");
 		
+		// For Demo purpose : populate LDAP from LDIF file
+		LdapTestUtils.cleanAndSetup(contextSource(), LdapUtils.newLdapName(env.getProperty("ldap.base")), new ClassPathResource("annuaire.ldif"));
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void destroy() throws Exception {
 		// For Demo purpose : stop embedded LDAP Server
+		LOGGER.info("Shutdown LDAP embedded server !");
 		LdapTestUtils.shutdownEmbeddedServer();
 	}
 }

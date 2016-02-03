@@ -19,7 +19,7 @@ import org.springframework.ldap.filter.Filter;
 import org.springframework.util.StringUtils;
 
 import sample.springldap.annotation.LdapAttribute;
-import sample.springldap.annotation.LdapClass;
+import sample.springldap.annotation.LdapEntry;
 import sample.springldap.annotation.LdapId;
 import sample.springldap.bean.LdapEntity;
 
@@ -27,7 +27,7 @@ import sample.springldap.bean.LdapEntity;
  * Custom LDAP helper.
  * It exposes generic methods for {@link ContextMapper}, {@link ModificationItem} and {@link Filter}.
  * @see LdapEntity
- * @see LdapClass
+ * @see LdapEntry
  * @see LdapAttribute
  * @author angelo.boursin
  */
@@ -36,7 +36,7 @@ public class LdapHelper {
 	/**
 	 * Build an LDAP {@link ContextMapper} using reflection.
 	 * Only {@link LdapAttribute} valued fields will be added to the mapper.
-	 * @param type Type of object (must be a type assignable from {@link LdapEntity} & annotated with {@link LdapClass})
+	 * @param type Type of object (must be a type assignable from {@link LdapEntity} & annotated with {@link LdapEntry})
 	 * @return {@link ContextMapper} for given type of object
 	 */
 	public static <T> ContextMapper<T> buildContextMapper(final Class<T> type) {
@@ -46,14 +46,14 @@ public class LdapHelper {
 			throw new IllegalArgumentException("Given object is null !");
 		}
 		
-		// If object does not extends LdapBean : throw exception !
+		// If object does not extends {@link LdapEntity} : throw exception !
 		if(type.isAssignableFrom(LdapEntity.class)){
-			throw new IllegalArgumentException("Given object does not extends LdapBean !");
+			throw new IllegalArgumentException("Given object does not extends LdapEntity !");
 		}
 	
-		// If object is not annotated with LdapClass  : throw exception !
-		if(!type.isAnnotationPresent(LdapClass.class)){
-			throw new IllegalArgumentException("Given object is not annotated with LdapClass annotation !");
+		// If object is not annotated with {@link LdapEntry}  : throw exception !
+		if(!type.isAnnotationPresent(LdapEntry.class)){
+			throw new IllegalArgumentException("Given object is not annotated with LdapEntry annotation !");
 		}
 		
 		// Our context mapper implementation
@@ -93,7 +93,7 @@ public class LdapHelper {
 	/**
 	 * Build a {@link ModificationItem} array from given object using reflection.
 	 * Only {@link LdapAttribute} editable fields will be added to the array.
-	 * @param object Object to process (must be an instance of {@link LdapEntity} & annotated with {@link LdapClass})
+	 * @param object Object to process (must be an instance of {@link LdapEntity} & annotated with {@link LdapEntry})
 	 * @param attributes {@link Attributes} of existing object in order to determine if it's a ADD_ATTRIBUTE or a REPLACE_ATTRIBUTE.
 	 * @return Array of {@link ModificationItem}
 	 */
@@ -106,14 +106,14 @@ public class LdapHelper {
 			throw new IllegalArgumentException("Given object is null !");
 		}
 		
-		// If object does not extends LdapBean : throw exception !
+		// If object does not extends {@link LdapEntity} : throw exception !
 		if(!(object instanceof LdapEntity)){
-			throw new IllegalArgumentException("Given object does not extends LdapBean !");
+			throw new IllegalArgumentException("Given object does not extends LdapEntity !");
 		}
 	
-		// If object is not annotated with LdapClass  : throw exception !
-		if(!object.getClass().isAnnotationPresent(LdapClass.class)){
-			throw new IllegalArgumentException("Given object is not annotated with LdapClass annotation !");
+		// If object is not annotated with {@link LdapEntry}  : throw exception !
+		if(!object.getClass().isAnnotationPresent(LdapEntry.class)){
+			throw new IllegalArgumentException("Given object is not annotated with LdapEntry annotation !");
 		}
 		
 		try{
@@ -147,7 +147,7 @@ public class LdapHelper {
 	/**
 	 * Build a LDAP {@link Filter} from given criteria using reflection.
 	 * Only {@link LdapAttribute} search-able fields will be added to the filter.
-	 * @param criteria Criteria object (must be an object annotated with {@link LdapClass})
+	 * @param criteria Criteria object (must be an object annotated with {@link LdapEntry})
 	 * @return {@link Filter}
 	 */
 	public static <T> Filter buildFilter(T criteria){
@@ -159,16 +159,16 @@ public class LdapHelper {
 			throw new IllegalArgumentException("Given object is null !");
 		}
 		
-		// If object is not annotated with LdapClass : throw exception !
-		if(!criteria.getClass().isAnnotationPresent(LdapClass.class)){
-			throw new IllegalArgumentException("Given object is not annotated with LdapClass annotation !");
+		// If object is not annotated with {@link LdapEntry} : throw exception !
+		if(!criteria.getClass().isAnnotationPresent(LdapEntry.class)){
+			throw new IllegalArgumentException("Given object is not annotated with LdapEntry annotation !");
 		}
 		
 		try{
 			
 			// Add filter for object classes
-			LdapClass ldapClass = criteria.getClass().getAnnotation(LdapClass.class);
-			String[] objectClasses = ldapClass.value();
+			LdapEntry ldapEntry = criteria.getClass().getAnnotation(LdapEntry.class);
+			String[] objectClasses = ldapEntry.value();
 			for (String objectClass : objectClasses) {
 				filter.and(new EqualsFilter("objectclass", objectClass));
 			}
@@ -209,9 +209,9 @@ public class LdapHelper {
 			throw new IllegalArgumentException("Given object is null !");
 		}
 		
-		// If object is not annotated with LdapClass : throw exception !
-		if(!criteria.getClass().isAnnotationPresent(LdapClass.class)){
-			throw new IllegalArgumentException("Given object is not annotated with LdapClass annotation !");
+		// If object is not annotated with {@link LdapEntry} : throw exception !
+		if(!criteria.getClass().isAnnotationPresent(LdapEntry.class)){
+			throw new IllegalArgumentException("Given object is not annotated with LdapEntry annotation !");
 		}
 		
 		try {

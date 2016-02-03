@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Custom annotation for a LDAP attribute.
- * Attributes are defined under a {@link LdapClass}.
+ * Attributes are defined under a {@link LdapEntry}.
  * The ID attribute will be set with {@link LdapId}.
  * @author angelo.boursin
  */

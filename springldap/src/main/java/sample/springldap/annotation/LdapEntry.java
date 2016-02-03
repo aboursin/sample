@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface LdapClass {
+public @interface LdapEntry {
 	
 	/**
 	 * Array of matching LDAP objectClass

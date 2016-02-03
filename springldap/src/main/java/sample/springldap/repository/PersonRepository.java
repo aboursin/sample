@@ -2,18 +2,17 @@ package sample.springldap.repository;
 
 import java.util.List;
 
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.ldap.SizeLimitExceededException;
 
 import sample.springldap.annotation.LdapAttribute;
-import sample.springldap.annotation.LdapClass;
+import sample.springldap.annotation.LdapEntry;
 import sample.springldap.bean.Person;
 
 /**
  * Person repository.
  * @see Repository
  * @see Person
- * @see LdapClass
+ * @see LdapEntry
  * @see LdapAttribute
  * @author angelo.boursin
  */
@@ -21,7 +20,6 @@ public interface PersonRepository extends Repository<Person, String> {
 
 	/**
 	 * Find one person by CN.
-	 * Will throw an {@link IncorrectResultSizeDataAccessException} if no entry is found or if there are more than one matching entry.
 	 * @param cn Person Common Name
 	 * @return {@link Person}
 	 */

@@ -8,7 +8,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import sample.springldap.annotation.LdapAttribute;
-import sample.springldap.annotation.LdapClass;
+import sample.springldap.annotation.LdapEntry;
 
 /**
  * Person LDAP bean.
@@ -21,7 +21,7 @@ import sample.springldap.annotation.LdapClass;
  * </ul>
  * @author angelo.boursin
  */
-@LdapClass(value = {"person"})
+@LdapEntry(value = {"person"})
 public class Person extends LdapEntity implements Serializable{
 	
 	private static final long serialVersionUID = -8984744681251906477L;
