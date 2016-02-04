@@ -12,20 +12,33 @@ This sample is a Directory portal based on [Spring LDAP].
 - [Bootstrap Dialog]
 - [jQuery DataTables]
 
-## Attributes mapping
+## Entity mapping
 
-LDAP entry mapping is described with `@LdapEntry` annotation. 
+Custom LDAP entries are extending `LdapEntity` and mapping is described with `@LdapEntry` and `@LdapAttribute` annotations.
 
 ``` java
 @LdapEntry({"organizationalPerson", "person"})
-public class Person ...
+public class Person extends LdapEntity {
+ ...
+ @LdapAttribute("givenName")
+ private String firstname;
+ ...
+}
 ```
 
-LDAP attribute mapping is described with `@LdapAttribute` annotation.
+## Repository
+
+Custom LDAP repositoies are extending `LdapRepository` witch provides classic CRUD methods.
 
 ``` java
-@LdapAttribute("givenName")
-private String firstname;
+@Component
+public class PersonRepository extends LdapRepository<Person> {
+ ...
+ public PersonRepository(){
+  super(Person.class);
+ }
+ ...
+}
 ```
 
 ## Profiles
