@@ -22,27 +22,35 @@ public abstract class LdapEntity implements Serializable {
 	
 	@LdapId
 	@LdapAttribute(value = "cn", searchable = true)
-	private String cn;
+	private String id;
 	
-	@LdapAttribute(value = "dn")
 	private String dn;
 	
+	public LdapEntity(){
+		super();
+	}
+	
+	public LdapEntity(String id){
+		super();
+		this.id = id;
+	}
+	
 	/**
-	 * hashCode method is now based on 'cn' attribute.
+	 * hashCode method is now based on 'id' attribute.
 	 */
 	@Override
 	public int hashCode(){
-	    return new HashCodeBuilder().append(cn).toHashCode();
+	    return new HashCodeBuilder().append(id).toHashCode();
 	}
 
 	/**
-	 * equals method is now based on 'cn' attribute.
+	 * equals method is now based on 'id' attribute.
 	 */
 	@Override
 	public boolean equals(final Object obj){
 	    if(obj instanceof LdapEntity){
 	        final LdapEntity other = (LdapEntity) obj;
-	        return new EqualsBuilder().append(cn, other.cn).isEquals();
+	        return new EqualsBuilder().append(id, other.id).isEquals();
 	    } else{
 	        return false;
 	    }
@@ -55,22 +63,13 @@ public abstract class LdapEntity implements Serializable {
 	public String toString(){
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
-	
-	public LdapEntity(){
-		super();
-	}
-	
-	public LdapEntity(String cn){
-		super();
-		this.cn = cn;
+
+	public String getId() {
+		return id;
 	}
 
-	public String getCn() {
-		return cn;
-	}
-
-	public void setCn(String cn) {
-		this.cn = cn;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getDn() {

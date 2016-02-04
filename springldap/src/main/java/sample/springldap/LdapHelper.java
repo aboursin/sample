@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
@@ -36,19 +35,14 @@ public class LdapHelper {
 	/**
 	 * Build an LDAP {@link ContextMapper} using reflection.
 	 * Only {@link LdapAttribute} valued fields will be added to the mapper.
-	 * @param type Type of object (must be a type assignable from {@link LdapEntity} & annotated with {@link LdapEntry})
+	 * @param type Type of object (must be annotated with {@link LdapEntry})
 	 * @return {@link ContextMapper} for given type of object
 	 */
-	public static <T> ContextMapper<T> buildContextMapper(final Class<T> type) {
+	public static <T extends LdapEntity> ContextMapper<T> buildContextMapper(final Class<T> type) {
 		
 		// If object is null : throw exception !
 		if(type == null){
 			throw new IllegalArgumentException("Given object is null !");
-		}
-		
-		// If object does not extends {@link LdapEntity} : throw exception !
-		if(type.isAssignableFrom(LdapEntity.class)){
-			throw new IllegalArgumentException("Given object does not extends LdapEntity !");
 		}
 	
 		// If object is not annotated with {@link LdapEntry}  : throw exception !
@@ -68,6 +62,9 @@ public class LdapHelper {
 						
 					// Create a new instance of destination object
 					object = type.newInstance();
+					
+					// Set DN
+					object.setDn(adapter.getDn().toString());
 					
 					// Browse all fields
 					for(Field field : getAllFields(type)){
@@ -93,22 +90,16 @@ public class LdapHelper {
 	/**
 	 * Build a {@link ModificationItem} array from given object using reflection.
 	 * Only {@link LdapAttribute} editable fields will be added to the array.
-	 * @param object Object to process (must be an instance of {@link LdapEntity} & annotated with {@link LdapEntry})
-	 * @param attributes {@link Attributes} of existing object in order to determine if it's a ADD_ATTRIBUTE or a REPLACE_ATTRIBUTE.
+	 * @param object Object to process (must be annotated with {@link LdapEntry})
 	 * @return Array of {@link ModificationItem}
 	 */
-	public static <T> ModificationItem[] buildModificationItems(T object, Attributes attributes){
+	public static <T extends LdapEntity> ModificationItem[] buildModificationItems(T object){
 		
 		List<ModificationItem> items = new ArrayList<ModificationItem>();
 		
 		// If object is null : throw exception !
 		if(object == null){
 			throw new IllegalArgumentException("Given object is null !");
-		}
-		
-		// If object does not extends {@link LdapEntity} : throw exception !
-		if(!(object instanceof LdapEntity)){
-			throw new IllegalArgumentException("Given object does not extends LdapEntity !");
 		}
 	
 		// If object is not annotated with {@link LdapEntry}  : throw exception !
@@ -124,15 +115,10 @@ public class LdapHelper {
 				field.setAccessible(true);
 				Object value = field.get(object);
 				
-				// If field if annotated with LdapAttribute annotation & editable is true : add attribute
+				// If field if annotated with LdapAttribute annotation & editable is true : replace attribute
 				LdapAttribute ldapAttribute = field.getAnnotation(LdapAttribute.class);
 				if(ldapAttribute != null && ldapAttribute.updatable() && !StringUtils.isEmpty(value)){
-					
-					int mod = DirContext.REPLACE_ATTRIBUTE;
-					if(attributes.get(ldapAttribute.value()) == null){
-						mod = DirContext.ADD_ATTRIBUTE;
-					}
-					items.add(new ModificationItem(mod, new BasicAttribute(ldapAttribute.value(), value)));
+					items.add(new ModificationItem(DirContext.REPLACE_ATTRIBUTE, new BasicAttribute(ldapAttribute.value(), value)));
 				}
 				
 			}
@@ -150,7 +136,7 @@ public class LdapHelper {
 	 * @param criteria Criteria object (must be an object annotated with {@link LdapEntry})
 	 * @return {@link Filter}
 	 */
-	public static <T> Filter buildFilter(T criteria){
+	public static <T extends LdapEntity> Filter buildFilter(T criteria){
 		
 		AndFilter filter = new AndFilter();
 	      
@@ -202,7 +188,12 @@ public class LdapHelper {
 		return filter;
 	}
 	
-	public static <T> boolean isCriteriaEmpty(T criteria){
+	/**
+	 * Check if a given criteria is empty or not.
+	 * @param criteria Criteria to check
+	 * @return Boolean
+	 */
+	public static <T extends LdapEntity> boolean isCriteriaEmpty(T criteria){
 		
 		// If object is null : throw exception !
 		if(criteria == null){
