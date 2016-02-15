@@ -1,6 +1,23 @@
 /**
- * Display & activate filters input into datatable header
+ * Filter each DataTable columns. The plugin add a simple text input at 
+ * the top of each columns.
+ *
+ * TODO : Add the option to choose the type of input (text, select, 
+ * range...)
+ *
+ *  @summary Add a filter input on each DataTable columns
+ *  @name DataTables Filters
+ *  @author angelo.boursin
+ *
+ *  @example
+ *		$(document).ready(function() {
+ *		
+ *			// Initialize DataTable and active filter plugin
+ *			$('#example').DataTable().filtersOn();
+ *
+ *    } );
  */
+
 $.fn.dataTable.Api.register( 'filtersOn()', function () {
 	
 	var dataTable = this;
@@ -45,15 +62,13 @@ $.fn.dataTable.Api.register( 'filtersOn()', function () {
 	
 });
 
-/**
- * Clear filters (only if stateSave)
- */
 $.fn.dataTable.Api.register( 'filtersClear()', function () {
 	
 	var dataTable = this;
 	var id = $(dataTable.context[0].nTable).attr('id');
 	var state = dataTable.state.loaded();
 	
+	// Clean filters (only if stateSave)
 	if (state) {
 		console.log("stateSave:true > Clearing filters...");
 		$('#' + id +' .filter input').each( function (index) {
