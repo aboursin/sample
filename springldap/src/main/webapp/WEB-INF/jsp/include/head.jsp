@@ -3,8 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Sample Spring LDAP</title>
-<link rel="shortcut icon" href="./images/spring.png" />
-<link rel="icon" type="image/x-icon" href="./images/spring.png" />
+<link rel="shortcut icon" href="<c:url value='/images/spring.png'/>" />
+<link rel="icon" type="image/x-icon" href="<c:url value='/images/spring.png'/>" />
 
 <!--  jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

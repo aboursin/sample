@@ -6,7 +6,7 @@
 <html lang="fr">
 	<head>
 		
-		<%@include file="./include/head.jsp" %>
+		<%@ include file="include/head.jsp" %>
 		
 		<!-- Dialog plugin -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
@@ -18,18 +18,10 @@
 		
 		<!-- Custom css & js -->
 		<link href="<c:url value='/css/search.css'/>" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="https://raw.githubusercontent.com/aboursin/sample/master/datatables.filters/datatables.filters.js"></script>
+		
 		<script type="text/javascript">
 			$(document).ready(function(){
-				
-				// Create the filter header
-				$('#result thead').after(
-					$('<thead />').addClass('filter').append($('<tr />'))
-				);
-	
-				// Populate the filter header
-				$('#result thead th').each( function () {
-					$('#result .filter tr').append($('<th>').append($('<input type="text"/>').addClass('form-control input-sm')));
-				});
 				
 				// Build result dataTable
 				var resultTable = $('#result').DataTable({
@@ -93,14 +85,7 @@
 						if(info.pages < 2){ $('#result_paginate').hide(); } 
 						else { $('#result_paginate').show(); }
 					}
-				});
-				
-				// Filter input event : filter matching column
-				$('#result .filter input').each( function (index) {
-					$(this).on( 'keyup change', function () {
-						resultTable.column(index).search(this.value).draw();
-					});
-				});
+				}).filtersOn();
 				
 				// Search button event : search (update dataTable with form data)
 				$('#search').on('click', function(e){
@@ -144,7 +129,7 @@
 	</head>
 	<body>
 	
-		<%@include file="./include/navbar.jsp" %>
+		<%@ include file="include/navbar.jsp" %>
 		
 		<div class="container">
 		

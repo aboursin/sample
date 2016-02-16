@@ -26,8 +26,8 @@
              			<span class="glyphicon glyphicon-leaf"></span> Spring <span class="caret"></span>
              		</a>
              		<ul class="dropdown-menu">
-             			<li><a href="http://projects.spring.io/spring-framework">Spring MVC</a></li>
-             			<li><a href="http://projects.spring.io/spring-ldap">Spring LDAP</a></li>
+             			<li><a href="http://projects.spring.io/spring-framework"><span class="glyphicon glyphicon-grain"></span> Spring MVC</a></li>
+             			<li><a href="http://projects.spring.io/spring-ldap"><span class="glyphicon glyphicon-tent"></span> Spring LDAP</a></li>
              		</ul>
 		    	</li>
 		    	
@@ -45,8 +45,8 @@
              			<c:set var="cookielang" value="${empty param.lang ? cookie.lang.value : param.lang}"/>
              			<c:set var="lang" value="${empty cookielang ? 'fr' : cookielang}" />
              			
-             			<li class="${lang == 'en' ? 'active' : ''}"><a href="?lang=en"><s:message code="lang.en"/></a></li>
-             			<li class="${lang == 'fr' ? 'active' : ''}"><a href="?lang=fr"><s:message code="lang.fr"/></a></li>
+             			<li class="${lang == 'en' ? 'active' : ''}"><a href="?lang=en"><span class="glyphicon glyphicon-thumbs-up"></span> <s:message code="lang.en"/></a></li>
+             			<li class="${lang == 'fr' ? 'active' : ''}"><a href="?lang=fr"><span class="glyphicon glyphicon-thumbs-down"></span> <s:message code="lang.fr"/></a></li>
              		</ul>
 		    	</li>
 			</ul>
