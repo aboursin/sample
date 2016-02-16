@@ -60,6 +60,8 @@ $.fn.dataTable.Api.register( 'filtersOn()', function () {
 		});
 	});
 	
+	return dataTable;
+	
 });
 
 $.fn.dataTable.Api.register( 'filtersClear()', function () {
