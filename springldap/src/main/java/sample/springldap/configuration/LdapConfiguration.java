@@ -45,13 +45,14 @@ public class LdapConfiguration {
 	
 	/**
 	 * LDAP Template bean.
+	 * @param contextSource LDAP context source
 	 * @return New instance of {@link LdapTemplate}
 	 * @throws Exception
 	 */
 	@Bean
-	public LdapTemplate ldapTemplate() throws Exception{
+	public LdapTemplate ldapTemplate(ContextSource contextSource) throws Exception{
 		LdapTemplate ldapTemplate = new LdapTemplate();
-		ldapTemplate.setContextSource(contextSource());
+		ldapTemplate.setContextSource(contextSource);
 		return ldapTemplate;
 	}
 	
