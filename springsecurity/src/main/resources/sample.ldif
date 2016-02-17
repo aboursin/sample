@@ -1,0 +1,61 @@
+version: 1
+
+dn: dc=sample
+objectClass: domain
+objectClass: top
+dc: sample
+
+dn: dc=security,dc=sample
+objectClass: domain
+objectClass: top
+dc: security
+
+dn: ou=users,dc=security,dc=sample
+objectClass: extensibleObject
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: ou=groups,dc=security,dc=sample
+objectClass: extensibleObject
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: cn=User,ou=groups,dc=security,dc=sample
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: User
+uniqueMember: cn=Robert Browning,ou=users,dc=security,dc=sample
+uniqueMember: cn=Hugo Williams,ou=users,dc=security,dc=sample
+
+dn: cn=Admin,ou=groups,dc=security,dc=sample
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: Admin
+uniqueMember: cn=Hugo Williams,ou=users,dc=security,dc=sample
+
+
+dn: cn=Robert Browning,ou=users,dc=security,dc=sample
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Robert Browning
+sn: Browning
+givenname: Robert
+uid: user5
+mail: rbrowning@sample.com
+userPassword:: MTIzNDU2
+
+dn: cn=Hugo Williams,ou=users,dc=security,dc=sample
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Hugo Williams
+sn: Williams
+givenname: Hugo
+uid: user6
+mail: hwilliams@sample.com
+userPassword:: MTIzNDU2==
