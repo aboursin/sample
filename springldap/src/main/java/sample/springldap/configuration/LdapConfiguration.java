@@ -15,7 +15,7 @@ import org.springframework.ldap.core.support.LdapContextSource;
  * @see GlobalConfiguration
  * @author angelo.boursin
  */
-@Profile("std")
+@Profile("STD")
 @Configuration
 @PropertySource("classpath:ldap.properties")
 public class LdapConfiguration {

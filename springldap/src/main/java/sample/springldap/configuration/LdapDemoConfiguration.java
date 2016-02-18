@@ -22,7 +22,7 @@ import org.springframework.ldap.test.LdapTestUtils;
  * @see GlobalConfiguration
  * @author angelo.boursin
  */
-@Profile("demo")
+@Profile("DEMO")
 @Configuration
 @PropertySource("classpath:ldap.properties")
 public class LdapDemoConfiguration implements InitializingBean, DisposableBean {
