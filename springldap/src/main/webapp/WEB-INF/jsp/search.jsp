@@ -11,14 +11,14 @@
 		<!-- Dialog plugin -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
-			
+		
 		<!-- jQuery DataTables -->
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.css"/>
 		<script type="text/javascript" src="https://cdn.datatables.net/s/bs/dt-1.10.10/datatables.min.js"></script>
 		
 		<!-- Custom css & js -->
 		<link href="<c:url value='/css/search.css'/>" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="https://raw.githubusercontent.com/aboursin/sample/master/datatables.filters/datatables.filters.js"></script>
+		<script type="text/javascript" src="https://raw.githubusercontent.com/aboursin/datatables.filters/master/datatables.filters.js"></script>
 		
 		<script type="text/javascript">
 			$(document).ready(function(){
