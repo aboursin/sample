@@ -3,6 +3,8 @@ package sample.springsecurity.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -22,6 +24,8 @@ import sample.springsecurity.persistence.repository.UserRepository;
 @Profile("DB")
 public class AuthenticationService implements UserDetailsService, InitializingBean {
 
+	private static Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class);
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -39,14 +43,13 @@ public class AuthenticationService implements UserDetailsService, InitializingBe
 			authorities.add(new SimpleGrantedAuthority(role.getRole()));
 		}
 
-		//String completeName = String.format("%s %s", user.getFirstname(), user.getLastname());
-		//return new CustomUserDetails(username, completeName, user.getPassword(), authorities);
 		return new User(username, user.getPassword(), authorities);
 	}
 
 	@Override
 	@Profile("TEST")
 	public void afterPropertiesSet() throws Exception {
+		LOGGER.info("TEST Profile > Populate test users !");
 		// SHA1 password : '123456'
 		userRepository.save(new SecUser("user3", "John", "Keats", "7c4a8d09ca3762af61e59520943dc26494f8941b", "ROLE_USER"));
 		userRepository.save(new SecUser("user4", "John", "Milton", "7c4a8d09ca3762af61e59520943dc26494f8941b", "ROLE_USER", "ROLE_ADMIN"));

@@ -57,8 +57,12 @@
 				<p>Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.</p>
 				
 				<sec:authorize access="hasRole('ADMIN')">
-					<p><strong>Admin Note</strong> : Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+					<div class="alert alert-info">
+						<strong>Admin Note</strong> : Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+					</div>
 				</sec:authorize>
+				
+				<hr />
 				
 				<div class="row">
 					<div class="col-md-6">
@@ -72,6 +76,9 @@
 						</button>
 					</div>
 				</div>
+				
+				<hr />
+				
 			</div>
 			
 		</div>

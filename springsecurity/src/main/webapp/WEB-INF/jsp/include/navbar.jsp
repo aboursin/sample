@@ -25,9 +25,11 @@
 			<sec:authentication property="principal.class" var="usertype"/>
 			<c:choose>
 				<c:when test="${fn:contains(usertype, 'waffle.servlet.WindowsPrincipal')}">
+					<c:set value="ntlm" var="type" />
 					<sec:authentication property="principal.name" var="username"/>
 				</c:when>
 				<c:otherwise>
+					<c:set value="!ntlm" var="type" />
 					<sec:authentication property="principal.username" var="username"/>
 				</c:otherwise>
 			</c:choose>
@@ -41,6 +43,7 @@
 	             		<ul class="dropdown-menu">
 	             			<li><a href="http://projects.spring.io/spring-framework"><span class="glyphicon glyphicon-grain"></span> Spring MVC</a></li>
 	             			<li><a href="http://projects.spring.io/spring-security"><span class="glyphicon glyphicon-lock"></span> Spring Security</a></li>
+	             			<li><a href="http://projects.spring.io/spring-data-jpa/"><span class="glyphicon glyphicon-hdd"></span> Spring Data JPA</a></li>
 	             		</ul>
 			    	</li>
 			    	
@@ -53,16 +56,22 @@
 	             			<span class="glyphicon glyphicon-user"></span> <c:out value="${username}" /> <span class="caret"></span>
 	             		</a>
 	             		<ul class="dropdown-menu">
-	             			<sec:authorize access="hasRole('ADMIN')">
-	             				<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Configuration</a></li>
-	             			</sec:authorize>
-	             			<li><a href="<c:url value='/logout'/>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-	             			<li role="separator" class="divider"></li>
-                			<li class="dropdown-header">Granted authorities</li>
+	             		
+	             			<li class="dropdown-header">Granted authorities</li>
 	             			<sec:authentication property="authorities" var="roles" scope="page" />
 				      		<c:forEach var="role" items="${roles}">
 						    	<li><a>${role}</a></li>
 						    </c:forEach>
+						    
+						    <li role="separator" class="divider" />
+						    
+	             			<sec:authorize access="hasRole('ADMIN')">
+	             				<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Configuration</a></li>
+	             			</sec:authorize>
+	             			<c:if test="${type == '!ntlm'}">
+	             				<li><a href="<c:url value='/logout'/>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	     					</c:if>
+                			
 	             		</ul>
 			    	</li>
 				</ul>

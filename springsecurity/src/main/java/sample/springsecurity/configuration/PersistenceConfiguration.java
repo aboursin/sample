@@ -6,6 +6,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -26,6 +28,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:environment.properties")
 public class PersistenceConfiguration {
 
+	private static Logger LOGGER = LoggerFactory.getLogger(PersistenceConfiguration.class);
+	
+	public PersistenceConfiguration(){
+		super();
+		LOGGER.info("Load...");
+	}
+	
 	@Bean
 	public DataSource dataSource(Environment env) {
 		BasicDataSource basicDataSource = new BasicDataSource();

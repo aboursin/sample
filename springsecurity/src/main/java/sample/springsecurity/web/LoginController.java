@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import sample.springsecurity.configuration.SecurityConfiguration;
+import sample.springsecurity.configuration.SecurityMEMConfiguration;
 
 /**
  * Login controller.
@@ -18,8 +18,8 @@ public class LoginController {
 	
 	/**
 	 * Default view rendering.
-	 * @param error Error marker set by {@link SecurityConfiguration}
-	 * @param logout Logout marker set by {@link SecurityConfiguration}
+	 * @param error Error marker set by {@link SecurityMEMConfiguration}
+	 * @param logout Logout marker set by {@link SecurityMEMConfiguration}
 	 * @return Redirection to login view
 	 */
 	@RequestMapping(method = RequestMethod.GET)

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * Global configuration for our Spring MVC application.
- * @see SecurityConfiguration
+ * @see SecurityMEMConfiguration
  * @author angelo.boursin
  */
 @EnableWebMvc

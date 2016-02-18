@@ -1,5 +1,7 @@
 package sample.springsecurity.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +31,8 @@ import waffle.windows.auth.impl.WindowsAuthProviderImpl;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityNTLMConfiguration extends WebSecurityConfigurerAdapter {
 	
+	private static Logger LOGGER = LoggerFactory.getLogger(SecurityNTLMConfiguration.class);
+	
 	@Autowired
 	private NegotiateSecurityFilterEntryPoint authenticationEntryPoint;
 
@@ -37,7 +41,7 @@ public class SecurityNTLMConfiguration extends WebSecurityConfigurerAdapter {
 	
 	public SecurityNTLMConfiguration(){
 		super();
-		System.out.println("Security NTLM Configuration...");
+		LOGGER.info("Load...");
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package sample.springsecurity.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +28,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @PropertySource("classpath:environment.properties")
 public class SecurityLDAPConfiguration extends WebSecurityConfigurerAdapter{
 	
+	private static Logger LOGGER = LoggerFactory.getLogger(SecurityLDAPConfiguration.class);
+	
 	@Autowired
 	private Environment env;
 	
 	public SecurityLDAPConfiguration(){
 		super();
-		System.out.println("Security LDAP Configuration...");
+		LOGGER.info("Load...");
 	}
 
 	/**
@@ -43,6 +47,7 @@ public class SecurityLDAPConfiguration extends WebSecurityConfigurerAdapter{
 	public void configureGlobal(AuthenticationManagerBuilder auth, LdapContextSource contextSource) throws Exception {
 		
 		if(env.acceptsProfiles("TEST")){
+			LOGGER.info("TEST Profile > Embedded LDAP server based on LDIF file !");
 			// Example : LDIF (login : uid / Base64 password : '123456')
 			auth.ldapAuthentication()
 				.userSearchBase(env.getRequiredProperty("ldif.usersearchbase"))

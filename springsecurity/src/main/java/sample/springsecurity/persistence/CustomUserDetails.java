@@ -11,14 +11,14 @@ public class CustomUserDetails implements UserDetails, CredentialsContainer{
 	private static final long serialVersionUID = 1178116163753207982L;
 	
 	private String username;
-	private String completeName;
+	private String name;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public CustomUserDetails(String username, String completename, String password, Collection<? extends GrantedAuthority> authorities){
+	public CustomUserDetails(String username, String name, String password, Collection<? extends GrantedAuthority> authorities){
 		super();
 		this.username = username;
-		this.completeName = completename;
+		this.name = name;
 		this.password = password;
 		this.authorities = authorities;
 	}
@@ -29,7 +29,7 @@ public class CustomUserDetails implements UserDetails, CredentialsContainer{
 	}
 
 	public String getCompleteName() {
-		return completeName;
+		return name;
 	}
 	
 	@Override

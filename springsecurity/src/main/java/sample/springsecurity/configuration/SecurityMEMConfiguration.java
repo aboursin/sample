@@ -1,5 +1,7 @@
 package sample.springsecurity.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -17,11 +19,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Profile({ "MEM" })
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityMEMConfiguration extends WebSecurityConfigurerAdapter {
 	
-	public SecurityConfiguration(){
+	private static Logger LOGGER = LoggerFactory.getLogger(SecurityMEMConfiguration.class);
+	
+	public SecurityMEMConfiguration(){
 		super();
-		System.out.println("Security Configuration...");
+		LOGGER.info("Load...");
 	}
 
 	/**

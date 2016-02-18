@@ -1,5 +1,7 @@
 package sample.springsecurity.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -23,6 +25,8 @@ import sample.springsecurity.persistence.AuthenticationService;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityDBConfiguration extends WebSecurityConfigurerAdapter{
 
+	private static Logger LOGGER = LoggerFactory.getLogger(SecurityDBConfiguration.class);
+	
 	@Autowired
 	private AuthenticationService authenticationService;
 	
@@ -31,7 +35,7 @@ public class SecurityDBConfiguration extends WebSecurityConfigurerAdapter{
 	
 	public SecurityDBConfiguration(){
 		super();
-		System.out.println("Security DB Configuration...");
+		LOGGER.info("Load...");
 	}
 
 	/**
